@@ -4,6 +4,8 @@
 
 Une tâche répétitive prend plusieurs minutes à la main. Transformez-la en procédure reproductible.
 
+> Cette partie se fait sur un vrai serveur (SSH). L'enchaînement de commandes, la capture de sortie et les scripts Bash reposent sur un shell Unix — que le terminal de WordPress Playground ne fournit pas (`&&`, `|`, `$(...)` n'y sont pas interprétés).
+
 ## 1. Enchaîner des commandes
 
 ```bash
