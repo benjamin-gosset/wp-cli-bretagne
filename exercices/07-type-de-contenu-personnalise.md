@@ -51,16 +51,18 @@ wp post term set <ID_du_livre> genre science-fiction
 
 ## Étape 4 — Faire le ménage (suppression en masse)
 
-Observer avant de supprimer, toujours :
+Observer avant de supprimer, toujours. Listez d'abord les identifiants :
 
 ```bash
 wp post list --post_type=livre --format=ids
 ```
 
-Puis supprimer d'un coup, en réutilisant la sortie de la commande précédente :
+La commande affiche les IDs séparés par des espaces, par exemple : `45 46 47 48`.
+
+Recopiez-les dans la commande de suppression :
 
 ```bash
-wp post delete $(wp post list --post_type=livre --format=ids) --force
+wp post delete 45 46 47 48 --force
 ```
 
 Vérifier que la liste est vide :
@@ -68,6 +70,14 @@ Vérifier que la liste est vide :
 ```bash
 wp post list --post_type=livre
 ```
+
+> **Pourquoi coller les IDs à la main ?** Le terminal de Playground n'est pas un shell Unix complet : la substitution `$(...)` n'y est pas interprétée (elle renvoie une erreur de paramètres). Sur un vrai serveur (SSH), on écrirait tout en une ligne :
+>
+> ```bash
+> wp post delete $(wp post list --post_type=livre --format=ids) --force
+> ```
+>
+> Faire les deux étapes séparément a aussi un intérêt pédagogique : on **voit** la liste d'IDs avant de l'utiliser.
 
 ## À discuter
 
