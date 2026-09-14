@@ -37,6 +37,21 @@
       }
     },
     {
+      "step": "writeFiles",
+      "writeToPath": "/wordpress/wp-content/plugins",
+      "filesTree": {
+        "resource": "literal:directory",
+        "name": "atelier-cpt",
+        "files": {
+          "atelier-cpt.php": "<?php\n/**\n * Plugin Name: Atelier CPT\n * Description: Enregistre un type de contenu Livre et une taxonomie Genre pour le TP6.\n * Version: 1.0.0\n */\nadd_action( 'init', function () {\n    register_post_type( 'livre', array(\n        'labels'       => array( 'name' => 'Livres', 'singular_name' => 'Livre' ),\n        'public'       => true,\n        'has_archive'  => true,\n        'show_in_rest' => true,\n        'menu_icon'    => 'dashicons-book',\n        'supports'     => array( 'title', 'editor', 'excerpt', 'custom-fields' ),\n        'rewrite'      => array( 'slug' => 'livres' ),\n    ) );\n    register_taxonomy( 'genre', 'livre', array(\n        'labels'       => array( 'name' => 'Genres', 'singular_name' => 'Genre' ),\n        'public'       => true,\n        'hierarchical' => true,\n        'show_in_rest' => true,\n    ) );\n} );\n"
+        }
+      }
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp plugin activate atelier-cpt"
+    },
+    {
       "step": "installPlugin",
       "pluginData": { "resource": "wordpress.org/plugins", "slug": "query-monitor" }
     },

@@ -25,25 +25,18 @@ Le site « La Maison des Contributeurs » se construit automatiquement. Ouvrir e
 
 Compte administrateur : `admin`. Mots de passe et données sont destinés à cet atelier local — ne jamais les réutiliser ailleurs.
 
-## Deux environnements
-
-| Usage | Où |
-|---|---|
-| TP1 observer · TP2 maintenance · TP3 incident | WordPress Playground |
-| TP4 migration — simulation `--dry-run` | Playground |
-| TP4 base de données réelle (`wp db export`, `wp db query`) | Serveur |
-| TP5 automatisation — SSH, cron, opérations lourdes | Serveur |
-
 `wp db export` et `wp db query` ne fonctionnent pas sous Playground (base SQLite) : ces démonstrations se font sur le serveur.
 
-## Déroulé de la table
+## Par où commencer ?
 
-| Profil | Point d'entrée |
+| Vous… | Commencez par |
 |---|---|
-| Découvre WP-CLI | TP1 — observer un site |
-| Utilise déjà WordPress | TP2 — maintenance |
-| Administre des sites | TP3 incident, puis TP4 migration |
-| Développe / veut automatiser | TP5 — automatisation |
+| découvrez WP-CLI | TP1 — Prise en main |
+| utilisez déjà WordPress | TP2 — Maintenance |
+| administrez des sites | TP3, TP4, TP6 |
+| développez / automatisez | TP5, TP7 |
+
+Chaque TP est indépendant : entrez par celui qui vous parle.
 
 Règle d'or : **observer avant de modifier**.
 
