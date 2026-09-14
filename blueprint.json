@@ -1,0 +1,189 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "extraLibraries": [
+    "wp-cli"
+  ],
+  "landingPage": "/wp-admin/",
+  "login": true,
+  "steps": [
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "atelier-wp-cli-2026"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "La Maison des Contributeurs",
+        "blogdescription": "Atelier pratique WP-CLI",
+        "timezone_string": "Europe/Paris",
+        "date_format": "d/m/Y",
+        "time_format": "H:i"
+      }
+    },
+    {
+      "step": "writeFiles",
+      "writeToPath": "/wordpress/wp-content/plugins",
+      "filesTree": {
+        "resource": "literal:directory",
+        "name": "atelier-incident",
+        "files": {
+          "atelier-incident.php": "<?php\n/**\n * Plugin Name: Atelier Incident\n * Description: Plugin volontairement défectueux pour l'atelier WP-CLI.\n * Version: 1.0.0\n */\nif ( get_option( 'atelier_incident_enabled', '0' ) === '1' ) {\n    throw new RuntimeException('Incident WP-CLI : le plugin Atelier Incident provoque volontairement une erreur.');\n}\n"
+        }
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": { "resource": "wordpress.org/plugins", "slug": "query-monitor" }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": { "resource": "wordpress.org/plugins", "slug": "classic-editor" }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": { "resource": "wordpress.org/plugins", "slug": "duplicate-post" }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": { "resource": "wordpress.org/plugins", "slug": "contact-form-7" }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": { "resource": "wordpress.org/plugins", "slug": "wordpress-seo" }
+    },
+    {
+      "step": "installTheme",
+      "themeData": { "resource": "wordpress.org/themes", "slug": "twentytwentyfour" }
+    },
+    {
+      "step": "installTheme",
+      "themeData": { "resource": "wordpress.org/themes", "slug": "twentytwentyfive" },
+      "options": { "activate": true }
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp plugin deactivate classic-editor duplicate-post"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp plugin deactivate atelier-incident"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp user create alice.admin alice@example.test --role=administrator --user_pass='atelier-wp-cli-2026'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp user create bruno.admin bruno@example.test --role=administrator --user_pass='atelier-wp-cli-2026'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp user create clara.editor clara@example.test --role=editor --user_pass='atelier-wp-cli-2026'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp user create david.author david@example.test --role=author --user_pass='atelier-wp-cli-2026'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp user create emma.contributor emma@example.test --role=contributor --user_pass='atelier-wp-cli-2026'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp term create category Actualités"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp term create category Contribution"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp term create category Technique"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp term create post_tag wp-cli"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp term create post_tag maintenance"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post create --post_title='Bienvenue à la Maison des Contributeurs' --post_content='Bienvenue dans le site de démonstration de l’atelier WP-CLI.' --post_status=publish"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post create --post_title='Préparer une contribution' --post_content='Quelques repères pour contribuer à un projet WordPress.' --post_status=publish"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post create --post_title='Maintenance du site' --post_content='La maintenance régulière permet de garder un site sain.' --post_status=publish"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post create --post_title='Automatiser les tâches répétitives' --post_content='WP-CLI permet de transformer des opérations manuelles en procédures reproductibles.' --post_status=publish"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post generate --count=20 --post_type=post --post_status=publish"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post create --post_type=page --post_title='À propos' --post_content='La Maison des Contributeurs est un site de démonstration pour l’atelier WP-CLI.' --post_status=publish"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post create --post_type=page --post_title='Contact' --post_content='Page de contact de démonstration.' --post_status=publish"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp post create --post_type=page --post_title='Nos contributions' --post_content='Ce que nous faisons pour la communauté WordPress.' --post_status=publish"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp menu create 'Menu principal'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp menu item add-custom 'Menu principal' Accueil /"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp menu item add-custom 'Menu principal' 'À propos' /a-propos/"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp menu item add-custom 'Menu principal' Contact /contact/"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp menu create 'Menu pied de page'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp menu item add-custom 'Menu pied de page' 'Nos contributions' /nos-contributions/"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp option update atelier_demo_environment playground"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp option update atelier_demo_version '0.4-playground'"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp option update atelier_incident_enabled 0"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp eval \"copy( WP_CONTENT_DIR . '/plugins/sqlite-database-integration/db.copy', WP_CONTENT_DIR . '/db.php' );\""
+    }
+  ]
+}
