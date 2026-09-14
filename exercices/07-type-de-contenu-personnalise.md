@@ -82,8 +82,14 @@ wp post list --post_type=livre
   (rappel : `wp eval` exécute du PHP arbitraire — outil de dev/debug, jamais à l'aveugle sur une prod).
 - Exporter uniquement les livres : `wp export --post_type=livre`.
 
-## Repères animateur
+## Pour aller plus loin — traiter de gros volumes (avancé · shell)
 
-- Point clé : un CPT vient du **code** (ici l'extension Atelier CPT), pas de WP-CLI.
-- La séquence liste-puis-supprime via `$(...)` réutilise le motif du TP5 : capturer une sortie pour la réinjecter.
-- Réserve : tester `wp post-type list`, la génération et la suppression en masse sur l'environnement réel avant l'atelier.
+> Optionnel, et ce n'est plus du WP-CLI mais du shell. À sauter si vous débutez ; à explorer côté serveur plutôt que dans Playground (où `xargs` peut être incomplet).
+
+Passer **tous** les IDs d'un coup avec `$(…)` atteint une limite du shell sur des milliers d'éléments (« Argument list too long »). On découpe alors le travail en lots avec `xargs` :
+
+```bash
+wp post list --post_type=livre --format=ids | xargs -n 100 wp post delete --force
+```
+
+`-n 100` = 100 IDs maximum par appel. Ajouter `-r` évite de lancer la commande si la liste est vide.
