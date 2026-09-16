@@ -1,4 +1,4 @@
-# Défi final — Vous avez 10 minutes
+# Défi final
 
 ## Scénario
 
